@@ -9,21 +9,22 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Win32.SafeHandles;
 
-namespace HW_11_3
+namespace HW_11_3_1
 {
     internal class Program
     {
-    
+
         static async Task Main(string[] args)
         {
-            Bank.Clients = new ObservableCollection<Client>();
-            InterfaceManager user;
+            Bank.Clients = new List<Client>();
 
-            using (FileStream fs = new FileStream("bankClients.json", FileMode.Open))
+            IbankWorker user;
+
+            using (FileStream fs = new FileStream("bankClients.json", FileMode.OpenOrCreate))
             {
                 if (fs.Length > 0)
                 {
-                    Bank.Clients = JsonSerializer.Deserialize<ObservableCollection<Client>>(fs);
+                    Bank.Clients = JsonSerializer.Deserialize<List<Client>>(fs);
 
                 }
             }
@@ -36,13 +37,13 @@ namespace HW_11_3
 
             if (readValue == "1")
             {
-                user = new Manager();
+               user = new Manager();
             }
-            else 
+            else
             {
-                user = new Consultant();
+               user = new Consultant();
             }
-
+           
             bool runProgram = true;
 
             while (runProgram)
@@ -78,9 +79,9 @@ namespace HW_11_3
                         string newTelefonNumber = Console.ReadLine();
                         Console.WriteLine("Введите номер паспорта");
                         string newPasportNumber = Console.ReadLine();
-                        user.AddClient(fullNewName, newTelefonNumber, newPasportNumber,$"{DateTime.Now}",$"{user.GetType()}","created");
+                        user.AddClient(fullNewName, newTelefonNumber, newPasportNumber, $"{DateTime.Now}", $"{user.GetType()}", "created");
                         break;
-                        
+
                     case "2":
                         Console.WriteLine("Введите ID клиента для изменения его данных");
                         int id = Convert.ToInt32(Console.ReadLine());
@@ -92,18 +93,18 @@ namespace HW_11_3
                         {
                             case "1":
                                 Console.WriteLine("Введите ФИО через пробел");
-                                (user as Manager).ChangeFullName(id,Console.ReadLine());
+                                user.ChangeFullName(id, Console.ReadLine());
                                 break;
                             case "2":
                                 Console.WriteLine("Введите новый номер телефона");
-                                user.ChangeTelefonNumber(id,Console.ReadLine());
+                                user.ChangeTelefonNumber(id, Console.ReadLine());
                                 break;
                             case "3":
                                 Console.WriteLine("Введите номер паспорта");
-                                user.ChangePassportNumber(id,Console.ReadLine());
+                                user.ChangePassportNumber(id, Console.ReadLine());
                                 break;
-                            default: 
-                                Console.WriteLine("неверная команда"); 
+                            default:
+                                Console.WriteLine("неверная команда");
                                 break;
                         }
                         user.PrintClient(id);
@@ -127,7 +128,7 @@ namespace HW_11_3
                         break;
                     default: break;
                 }
-                                    
+
                 Console.ReadLine();
             }
 
