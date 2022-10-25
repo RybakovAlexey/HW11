@@ -20,11 +20,12 @@ namespace HW_11_3_1
 
             IbankWorker user;
 
-            using (FileStream fs = new FileStream("bankClients3.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("bankClients.json", FileMode.OpenOrCreate))
             {
                 if (fs.Length!=0)
                 {
                     Bank.Clients = await JsonSerializer.DeserializeAsync<List<Client>>(fs);
+                    Console.WriteLine("Data has been read ");
                 }
             }
 
@@ -119,7 +120,7 @@ namespace HW_11_3_1
                         break;
                     case "q":
                         runProgram = false;
-                        using (FileStream fs = new FileStream("bankClients3.json", FileMode.OpenOrCreate))
+                        using (FileStream fs = new FileStream("bankClients.json", FileMode.OpenOrCreate))
                         {
                             await JsonSerializer.SerializeAsync<List<Client>>(fs, Bank.Clients);
                             Console.WriteLine("Data has been saved to file");
