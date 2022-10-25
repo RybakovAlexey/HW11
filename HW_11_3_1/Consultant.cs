@@ -11,6 +11,9 @@ namespace HW_11_3_1
         public void ChangeTelefonNumber(int id, string number)
         {
             Bank.Clients[id].TelefonNumber = number;
+            Bank.Clients[id].WhoChange = "Consultant";
+            Bank.Clients[id].WhatChange = "Telefon";
+            Bank.Clients[id].DataChange = $"{DateTime.Now}";
         }
 
         public void PrintClients()
@@ -19,10 +22,10 @@ namespace HW_11_3_1
                 $"{"Имя",10}" +
                 $"{" Фамилия",15} " +
                 $"{"Отчество",15} " +
-                $"{"паспорт",15}" +
+                $"{"паспорт",20}" +
                 $"{"телефон",15}" +
-                $"{"Дата",15}" +
-                $"{"работник",15}" +
+                $"{"Дата",20}" +
+                $"{"работник",10}" +
                 $"{"Вид изменения",15}");
             foreach (Client client in Bank.Clients)
             {
@@ -42,8 +45,8 @@ namespace HW_11_3_1
             $"{Bank.Clients[id].Patronymic,15}" +
             $"{passport,20}" +
             $"{Bank.Clients[id].TelefonNumber,15}" +
-            $"{Bank.Clients[id].DataChange,15}" +
-            $"{Bank.Clients[id].WhoChange,15}" +
+            $"{Bank.Clients[id].DataChange,20}" +
+            $"{Bank.Clients[id].WhoChange,10}" +
             $"{Bank.Clients[id].WhatChange,15}"
             );
         }
@@ -60,10 +63,7 @@ namespace HW_11_3_1
 
         public void AddClient(string fullName,
             string telefonNumber,
-            string pasportNumber,
-            string dataChange,
-            string whoChange,
-            string whatChange)
+            string pasportNumber)
         {
             Console.WriteLine("У вас недостаточно прав для выполнения этой операции");
         }

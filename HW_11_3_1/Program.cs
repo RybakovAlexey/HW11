@@ -20,12 +20,11 @@ namespace HW_11_3_1
 
             IbankWorker user;
 
-            using (FileStream fs = new FileStream("bankClients.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("bankClients3.json", FileMode.OpenOrCreate))
             {
-                if (fs.Length > 0)
+                if (fs.Length!=0)
                 {
-                    Bank.Clients = JsonSerializer.Deserialize<List<Client>>(fs);
-
+                    Bank.Clients = await JsonSerializer.DeserializeAsync<List<Client>>(fs);
                 }
             }
 
@@ -79,7 +78,7 @@ namespace HW_11_3_1
                         string newTelefonNumber = Console.ReadLine();
                         Console.WriteLine("Введите номер паспорта");
                         string newPasportNumber = Console.ReadLine();
-                        user.AddClient(fullNewName, newTelefonNumber, newPasportNumber, $"{DateTime.Now}", $"{user.GetType()}", "created");
+                        user.AddClient(fullNewName, newTelefonNumber, newPasportNumber);
                         break;
 
                     case "2":
@@ -120,16 +119,15 @@ namespace HW_11_3_1
                         break;
                     case "q":
                         runProgram = false;
-                        using (FileStream fs = new FileStream("bankClients.json", FileMode.OpenOrCreate))
+                        using (FileStream fs = new FileStream("bankClients3.json", FileMode.OpenOrCreate))
                         {
-                            await JsonSerializer.SerializeAsync<ObservableCollection<Client>>(fs, Bank.Clients);
+                            await JsonSerializer.SerializeAsync<List<Client>>(fs, Bank.Clients);
                             Console.WriteLine("Data has been saved to file");
                         }
                         break;
                     default: break;
                 }
 
-                Console.ReadLine();
             }
 
 

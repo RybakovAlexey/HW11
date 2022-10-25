@@ -40,6 +40,9 @@ namespace HW_11_3_1
         public void ChangePassportNumber(int id, string number)
         {
             Bank.Clients[id].PasportNumber = number;
+            Bank.Clients[id].WhoChange = "Manager";
+            Bank.Clients[id].WhatChange = "Pasport";
+            Bank.Clients[id].DataChange = $"{DateTime.Now}";
         }
 
         public void ChangeFullName(int id, string fullName)
@@ -48,18 +51,21 @@ namespace HW_11_3_1
             Bank.Clients[id].Name = subNames[0];
             Bank.Clients[id].Surname = subNames[1];
             Bank.Clients[id].Patronymic = subNames[2];
+            Bank.Clients[id].WhoChange = "Manager";
+            Bank.Clients[id].WhatChange = "Name";
+            Bank.Clients[id].DataChange = $"{DateTime.Now}";
         }
         public virtual void ChangeTelefonNumber(int id, string number)
         {
             Bank.Clients[id].TelefonNumber = number;
+            Bank.Clients[id].WhoChange = "Manager";
+            Bank.Clients[id].WhatChange = "Telefon";
+            Bank.Clients[id].DataChange = $"{DateTime.Now}";
         }
 
         public void AddClient(string fullName,
             string telefonNumber,
-            string pasportNumber,
-            string dataChange,
-            string whoChange,
-            string whatChange)
+            string pasportNumber)
         {
             int id = Bank.Clients.Count;
             string[] subNames = fullName.Split(' ');
@@ -70,9 +76,9 @@ namespace HW_11_3_1
                                         subNames[2],
                                         telefonNumber,
                                         pasportNumber,
-                                        dataChange,
-                                        whoChange,
-                                        whatChange));
+                                        $"{DateTime.Now}",
+                                        "Manager",
+                                        "Add"));
         }
 
         public void DelClient(int id)

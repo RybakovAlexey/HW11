@@ -21,10 +21,7 @@ namespace HW_11_3_1
 
         public void AddClient(string fullName,
             string telefonNumber,
-            string pasportNumber,
-            string dataChange,
-            string whoChange,
-            string whatChange);
+            string pasportNumber);
 
 
         public void DelClient(int id);
