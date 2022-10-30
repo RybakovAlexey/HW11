@@ -10,15 +10,18 @@ namespace HW_11_3_1
     {
         public virtual void PrintClients()
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
             Console.WriteLine($"{"ID",5}" +
                 $"{"Имя",10}" +
                 $"{"Фамилия",15} " +
                 $"{"Отчество",15} " +
-                $"{"паспорт",15}" +
-                $"{"телефон",15}" +
-                $"{"Дата",15}" +
-                $"{"работник",15}" +
-                $"{"Вид изменения",15}");
+                $"{"Паспорт",15}" +
+                $"{"Телефон",15}" +
+                $"{"Дата изменения",25}" +
+                $"{"Работник",10}" +
+                $"{"Измение",10}",
+                Console.BackgroundColor);
+            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Client client in Bank.Clients)
             {
                 PrintClient(client.Id);
@@ -27,14 +30,14 @@ namespace HW_11_3_1
         public void PrintClient(int id)
         {
             Console.WriteLine($"{id,5}" +
-            $"{Bank.Clients[id].Name,15}" +
+            $"{Bank.Clients[id].Name,10}" +
             $"{Bank.Clients[id].Surname,15}" +
-            $"{Bank.Clients[id].Patronymic,15}" +
-            $"{Bank.Clients[id].PasportNumber,20}" +
-            $"{Bank.Clients[id].TelefonNumber,20}" +
-            $"{Bank.Clients[id].DataChange,15}" +
-            $"{Bank.Clients[id].WhoChange,15}" +
-            $"{Bank.Clients[id].WhatChange,15}");
+            $" {Bank.Clients[id].Patronymic,15}" +
+            $" {Bank.Clients[id].PasportNumber,15}" +
+            $"{Bank.Clients[id].TelefonNumber,15}" +
+            $"{Bank.Clients[id].DataChange, 25}" +
+            $"{Bank.Clients[id].WhoChange,10}" +
+            $"{Bank.Clients[id].WhatChange,10}");
         }
 
         public void ChangePassportNumber(int id, string number)

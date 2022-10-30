@@ -18,15 +18,18 @@ namespace HW_11_3_1
 
         public void PrintClients()
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
             Console.WriteLine($"{"ID",5}" +
                 $"{"Имя",10}" +
-                $"{" Фамилия",15} " +
+                $"{"Фамилия",15} " +
                 $"{"Отчество",15} " +
-                $"{"паспорт",20}" +
-                $"{"телефон",15}" +
-                $"{"Дата",20}" +
-                $"{"работник",10}" +
-                $"{"Вид изменения",15}");
+                $"{"Паспорт",15}" +
+                $"{"Телефон",15}" +
+                $"{"Дата",25}" +
+                $"{"Работник",10}" +
+                $"{"Измен",10}",
+                Console.BackgroundColor);
+            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Client client in Bank.Clients)
             {
                 PrintClient(client.Id);
@@ -42,22 +45,24 @@ namespace HW_11_3_1
             Console.WriteLine($"{Bank.Clients[id].Id,5}" +
             $"{Bank.Clients[id].Name,10}" +
             $"{Bank.Clients[id].Surname,15}" +
-            $"{Bank.Clients[id].Patronymic,15}" +
-            $"{passport,20}" +
+            $" {Bank.Clients[id].Patronymic,15}" +
+            $" {passport,15}" +
             $"{Bank.Clients[id].TelefonNumber,15}" +
-            $"{Bank.Clients[id].DataChange,20}" +
+            $"{Bank.Clients[id].DataChange,25}" +
             $"{Bank.Clients[id].WhoChange,10}" +
-            $"{Bank.Clients[id].WhatChange,15}"
+            $"{Bank.Clients[id].WhatChange,10}"
             );
         }
 
         public void ChangePassportNumber(int id, string number)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("У вас недостаточно прав для выполнения этой операции");
         }
 
         public void ChangeFullName(int id, string fullName)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("У вас недостаточно прав для выполнения этой операции");
         }
 
@@ -65,11 +70,13 @@ namespace HW_11_3_1
             string telefonNumber,
             string pasportNumber)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("У вас недостаточно прав для выполнения этой операции");
         }
 
         public void DelClient(int id)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("У вас недостаточно прав для выполнения этой операции");
         }
     }

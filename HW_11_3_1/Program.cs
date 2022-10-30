@@ -25,10 +25,10 @@ namespace HW_11_3_1
                 if (fs.Length!=0)
                 {
                     Bank.Clients = await JsonSerializer.DeserializeAsync<List<Client>>(fs);
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Data has been read ");
                 }
             }
-
             Console.WriteLine("кем вы себя индентифицируете в данный момент?");
             Console.WriteLine("Менеджер - введите 1");
             Console.WriteLine("Консультант - введите 2");
@@ -48,6 +48,7 @@ namespace HW_11_3_1
 
             while (runProgram)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Для Добавления клиента нажмите 1");
                 Console.WriteLine("Для изменения данных нажмите 2");
                 Console.WriteLine("Для удаления данных о клиенте нажмите 3");
@@ -85,7 +86,9 @@ namespace HW_11_3_1
                     case "2":
                         Console.WriteLine("Введите ID клиента для изменения его данных");
                         int id = Convert.ToInt32(Console.ReadLine());
+                        Console.ForegroundColor = ConsoleColor.White;
                         user.PrintClient(id);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Для изменения ФИО нажмите 1");
                         Console.WriteLine("Для изменения телефона нажмите 2");
                         Console.WriteLine("Для изменения номера паспорта нажмите 3");
@@ -107,7 +110,9 @@ namespace HW_11_3_1
                                 Console.WriteLine("неверная команда");
                                 break;
                         }
+                        Console.ForegroundColor = ConsoleColor.White;
                         user.PrintClient(id);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         break;
 
                     case "3":
@@ -116,11 +121,13 @@ namespace HW_11_3_1
                         user.DelClient(idDel);
                         break;
                     case "4":
+                        Console.ForegroundColor = ConsoleColor.White;
                         user.PrintClients();
+                        Console.ForegroundColor = ConsoleColor.Green;
                         break;
                     case "q":
                         runProgram = false;
-                        using (FileStream fs = new FileStream("bankClients.json", FileMode.OpenOrCreate))
+                        using (FileStream fs = new FileStream("bankClients.json", FileMode.Truncate))
                         {
                             await JsonSerializer.SerializeAsync<List<Client>>(fs, Bank.Clients);
                             Console.WriteLine("Data has been saved to file");
